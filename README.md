@@ -1,1 +1,1 @@
-# snapting
+# Snapting

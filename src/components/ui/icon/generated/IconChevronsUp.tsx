@@ -1,0 +1,36 @@
+import { Ref, forwardRef, memo } from "react";
+
+import { colorMap } from "@/components/ui/token/color";
+
+import type { IconProps } from "../types";
+import { convertSizeToPx } from "../utils";
+const SvgIconChevronsUp = (
+  { size = "24", sizePx, color = "currentColor", ...props }: IconProps,
+  ref: Ref<SVGSVGElement>,
+) => {
+  const finalSize = sizePx ? sizePx : convertSizeToPx(size);
+  const fill = color && colorMap[color];
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={finalSize}
+      height={finalSize}
+      fill={fill}
+      viewBox="0 0 24 24"
+      ref={ref}
+      {...props}
+    >
+      <path
+        fill={fill}
+        d="M12.707 5.293a1 1 0 0 0-1.414 0l-5 5a1 1 0 1 0 1.414 1.414L12 7.414l4.293 4.293a1 1 0 0 0 1.414-1.414z"
+      />
+      <path
+        fill={fill}
+        d="m17.707 17.293-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 1 0 1.414 1.414L12 14.414l4.293 4.293a1 1 0 0 0 1.414-1.414"
+      />
+    </svg>
+  );
+};
+const ForwardRef = forwardRef(SvgIconChevronsUp);
+const Memo = memo(ForwardRef);
+export default Memo;

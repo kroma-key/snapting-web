@@ -31,3 +31,7 @@ build
 coverage
 dist
 lib
+*storybook.log
+
+# storybook
+storybook-static

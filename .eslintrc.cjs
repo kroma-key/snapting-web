@@ -45,14 +45,13 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:functional/external-typescript-recommended",
-    // "plugin:functional/recommended",
-    // "plugin:functional/lite",
     "plugin:functional/stylistic",
     "plugin:prettier/recommended",
     "plugin:react-hooks/recommended",
     "plugin:@tanstack/eslint-plugin-query/recommended",
     "plugin:import/recommended",
-    "plugin:import/typescript"
+    "plugin:import/typescript",
+    "plugin:storybook/recommended"
   ],
   "rules": {
     "react/react-in-jsx-scope": "off",
@@ -63,6 +62,9 @@ module.exports = {
     "react/prop-types": "off",
     "react/no-unknown-property": ["error", { "ignore": ["css"] }],
     "import/no-unresolved": "error",
+
+    /* functional */
+    "functional/prefer-readonly-type": "warn",
 
     "sort-imports": [
       "error",

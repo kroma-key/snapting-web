@@ -8,26 +8,28 @@ import { decompressFromEncodedURIComponent } from "lz-string";
 import { z } from "zod";
 
 import Main from "./activities/Main";
+import SignIn from "./activities/SignIn";
+import SignUp from "./activities/SignUp";
+import Welcome from "./activities/Welcome";
 
-export const { Stack, activities } = stackflow({
+export const { Stack, activities, useStepFlow, useFlow } = stackflow({
   transitionDuration: 350,
   activities: {
+    Welcome,
+    SignUp: {
+      component: SignUp,
+      paramsSchema: {
+        type: "object",
+        properties: {
+          phoneNumber: {
+            type: "string",
+          },
+        },
+        required: [],
+      },
+    },
+    SignIn,
     Main,
-    // Article: {
-    //   component: Article,
-    //   paramsSchema: {
-    //     type: "object",
-    //     properties: {
-    //       articleId: {
-    //         type: "string",
-    //       },
-    //       title: {
-    //         type: "string",
-    //       },
-    //     },
-    //     required: ["articleId", "title"],
-    //   },
-    // },
   },
   plugins: [
     devtoolsPlugin(),
@@ -37,10 +39,12 @@ export const { Stack, activities } = stackflow({
     }),
     historySyncPlugin({
       routes: {
-        Main: "/",
-        Article: "/articles/:articleId",
+        Welcome: "/",
+        SignIn: "/sign-in",
+        SignUp: "/sign-up",
+        Main: "/main",
       },
-      fallbackActivity: () => "Main",
+      fallbackActivity: () => "Welcome",
     }),
     mapInitialActivityPlugin({
       mapper(url) {

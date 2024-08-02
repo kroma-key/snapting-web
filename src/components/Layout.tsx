@@ -1,11 +1,9 @@
 import { AppScreen } from "@stackflow/plugin-basic-ui";
+import { ComponentPropsWithoutRef } from "react";
 
-type PropOf<T> = T extends React.ComponentType<infer U> ? U : never;
-
-interface LayoutProps {
-  readonly appBar?: PropOf<typeof AppScreen>["appBar"];
-  readonly children: React.ReactNode;
-}
-export const Layout: React.FC<LayoutProps> = ({ appBar, children }) => (
-  <AppScreen appBar={appBar}>{children}</AppScreen>
+type Props = ComponentPropsWithoutRef<typeof AppScreen>;
+export const Layout: React.FC<Props> = ({ appBar, children, ...props }) => (
+  <AppScreen appBar={appBar} {...props}>
+    {children}
+  </AppScreen>
 );

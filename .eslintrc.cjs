@@ -62,9 +62,15 @@ module.exports = {
     "react/prop-types": "off",
     "react/no-unknown-property": ["error", { "ignore": ["css"] }],
     "import/no-unresolved": "error",
+    "@typescript-eslint/no-misused-promises": [
+      "warn",
+      {
+        "checksVoidReturn": false
+      }
+    ],
 
-    /* functional */
-    "functional/prefer-readonly-type": "warn",
+    /* functional*/
+    "functional/prefer-property-signatures": ["error", { "ignoreIfReadonlyWrapped": true } ],
 
     "sort-imports": [
       "error",

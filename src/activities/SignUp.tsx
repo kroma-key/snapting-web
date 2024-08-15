@@ -1,13 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { O } from "@mobily/ts-belt";
-import { Flex, Text } from "@radix-ui/themes";
 import type { ActivityComponentType } from "@stackflow/react";
 import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { P, match } from "ts-pattern";
 import { z } from "zod";
 
-import { Layout } from "@/components/layout";
+import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -19,6 +18,8 @@ import {
 } from "@/components/ui/form";
 import { IconArrowLeftCircle } from "@/components/ui/icon";
 import { Input } from "@/components/ui/input";
+import { Flex } from "@/components/ui/theme/flex";
+import { Text } from "@/components/ui/theme/text";
 import { useUnsafeFlow } from "@/hooks/useFlow";
 import { useTimer } from "@/hooks/useTimer";
 import { formatVerifySeconds } from "@/library/string";
@@ -60,17 +61,17 @@ const FirstStep = () => {
 
   return (
     <Flex direction="column" justify="between" className="h-full px-6 py-4">
-      <Flex direction="column" gap="1.5rem">
-        <Flex direction="column" gap="1rem">
+      <Flex direction="column" gap="32">
+        <Flex direction="column" gap="32">
           {/* @TODO: request for arrowleftcircle fill icon */}
           <Flex display="inline-flex" className="bg-black" asChild onClick={handleBack}>
             <IconArrowLeftCircle color="white" size="32" className="rounded-full" />
           </Flex>
-          <Flex direction="column" gap="0.25rem">
-            <Text size="5" weight="bold">
+          <Flex direction="column" gap="4">
+            <Text size="22" weight="bold">
               휴대폰번호로 본인확인 할게요.
             </Text>
-            <Text size="2" weight="light">
+            <Text size="22" weight="light">
               허위/중복 가입을 막고, 악성 사용자를 제재하는데만 사용돼요. 번호는 절대 누구에게도
               공개되지 않아요.
             </Text>
@@ -99,7 +100,7 @@ const FirstStep = () => {
           </Form>
         </Flex>
       </Flex>
-      <Flex direction="column" gap="0.5">
+      <Flex direction="column" gap="8">
         <Button
           fullWidth
           disabled={!form.formState.isValid}
@@ -160,20 +161,20 @@ const SecondStep: FC<{
 
   return (
     <Flex direction="column" justify="between" className="h-full px-6 py-4">
-      <Flex direction="column" gap="1rem">
-        <Flex direction="column" gap="1rem">
+      <Flex direction="column" gap="16">
+        <Flex direction="column" gap="16">
           {/* @TODO: request for arrowleftcircle fill icon */}
           <Flex display="inline-flex" className="bg-black" asChild onClick={handleBack}>
             <IconArrowLeftCircle color="white" size="32" className="rounded-full" />
           </Flex>
-          <Flex direction="column" gap="0.25rem">
-            <Text size="5" weight="bold">
+          <Flex direction="column" gap="4">
+            <Text size="22" weight="bold">
               {phoneNumber}
             </Text>
-            <Text size="5" weight="bold">
+            <Text size="22" weight="bold">
               전송된 인증번호를 입력해주세요.
             </Text>
-            <Text size="2" weight="light">
+            <Text size="22" weight="light">
               인증번호 {verifyCodeLength}자리를 입력해주세요
             </Text>
           </Flex>
@@ -201,7 +202,7 @@ const SecondStep: FC<{
           </Form>
         </Flex>
       </Flex>
-      <Flex direction="column" gap="0.5">
+      <Flex direction="column" gap="8">
         <Button
           fullWidth
           disabled={!form.formState.isValid}

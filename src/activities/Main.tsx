@@ -1,13 +1,12 @@
-import { Link } from "@radix-ui/themes";
 import type { ActivityComponentType } from "@stackflow/react";
 
-import { LayoutWithMenu } from "@/components/layout";
+import { LayoutWithMenu } from "@/components/Layout";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Flex } from "@/components/ui/flex";
 import { IconClock, IconFilter, IconPlus, IconZap } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
+import { Flex } from "@/components/ui/theme/flex";
 
 const Main: ActivityComponentType = () => {
   return (
@@ -17,12 +16,12 @@ const Main: ActivityComponentType = () => {
           <Badge className="gap-2" variant="secondary">
             <IconZap />0
           </Badge>
-          <Flex gap="0.5" align="center">
+          <Flex gap="8" align="center">
             {/* @TODO: replace stackflow link */}
             <Flex className="px-4 py-2">
-              <Link href="#" color="gray" underline="always">
+              {/* <Link href="#" color="gray" underline="always">
                 스냅팅 룰
-              </Link>
+              </Link> */}
             </Flex>
             <Flex>
               <Button size="icon" variant="ghost">
@@ -34,15 +33,17 @@ const Main: ActivityComponentType = () => {
       </Flex>
       <Flex direction="column" justify="between" className="h-[calc(100%-60px)] p-2">
         <Card className="w-full bg-black p-4 text-white">
-          <Flex direction="column" gap="2">
-            <Flex direction="column" gap="0.25">
-              <Text className="text-center text-4xl font-extrabold italic">SnapTing</Text>
+          <Flex direction="column" gap="32">
+            <Flex direction="column" gap="4">
+              <Text className="text-center text-4xl font-extrabold italic" color="black">
+                SnapTing
+              </Text>
               <Flex direction="column">
                 <Text className="text-center text-sm font-extrabold">매일 저녁 7시부터 9시</Text>
                 <Text className="text-center text-sm font-extrabold">스냅팅이 시작됩니다.</Text>
               </Flex>
             </Flex>
-            <Flex align="center" direction="column" gap="0.75">
+            <Flex align="center" direction="column" gap="12">
               <Badge variant="default" className="gap-1 bg-grey-700 px-2 py-1 text-grey-300">
                 <IconClock />
                 시작까지
@@ -68,8 +69,8 @@ const Main: ActivityComponentType = () => {
             <Flex>
               <Card className="w-full bg-white p-4">
                 <Flex justify="between" align="center">
-                  <Flex direction="column" gap="0.25">
-                    <Flex gap="0.25">
+                  <Flex direction="column" gap="4">
+                    <Flex gap="4">
                       {/* @TODO: apply figma color */}
                       <Badge>필수</Badge>
                       <Text weight="semibold" size="label/base/02">
@@ -90,7 +91,7 @@ const Main: ActivityComponentType = () => {
             </Flex>
           </Flex>
         </Card>
-        <Flex direction="column" gap="0.5">
+        <Flex direction="column" gap="8">
           <Flex justify="center">
             <Text color="content-teritary" size="paragraph/small">
               시작하면 알려드릴게요!

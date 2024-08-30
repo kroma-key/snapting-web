@@ -9,6 +9,12 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
+import {
+  HoverCard,
+  HoverCardArrow,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 import { IconAlertTriangle } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { Flex } from "@/components/ui/theme/flex";
@@ -90,11 +96,21 @@ export const TermAgreeDrawer: FC<{
             ))}
           </Flex>
         </Flex>
-        <DrawerFooter>
-          <DrawerClose asChild>
-            <Button size="lg" onClick={handleAgree}>
-              동의하기
-            </Button>
+        <DrawerFooter className="pb-4">
+          <DrawerClose>
+            <HoverCard open>
+              <HoverCardTrigger asChild>
+                <Button fullWidth size="lg" onClick={handleAgree}>
+                  동의하기
+                </Button>
+              </HoverCardTrigger>
+              <HoverCardContent sideOffset={16} className="bg-primary text-primary-foreground">
+                <Text size="label/base/02">
+                  건전한 직장인 소개팅을 위해 스냅팅도 함께 노력할게요.
+                </Text>
+                <HoverCardArrow />
+              </HoverCardContent>
+            </HoverCard>
           </DrawerClose>
         </DrawerFooter>
       </DrawerContent>

@@ -1,8 +1,8 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
-const generatedFilesPath = path.join(__dirname, '../generated');
-const iconFiles = fs.readdirSync(generatedFilesPath).filter((file) => file.includes('.tsx'));
+const generatedFilesPath = path.join(__dirname, "../generated");
+const iconFiles = fs.readdirSync(generatedFilesPath).filter((file) => file.includes(".tsx"));
 
 const getExportLineTemplate = (iconName) => {
   return `export { default as ${iconName} } from "./generated/${iconName}"`;
@@ -10,7 +10,7 @@ const getExportLineTemplate = (iconName) => {
 
 const entryText = iconFiles.map((filename) => {
   try {
-    const [iconName, _filenameExtension] = filename.split('.');
+    const [iconName, _filenameExtension] = filename.split(".");
     return getExportLineTemplate(iconName);
   } catch (error) {
     console.log(error);
@@ -18,8 +18,8 @@ const entryText = iconFiles.map((filename) => {
 });
 
 try {
-  const moduleFilePath = path.join(__dirname, '../generated.ts');
-  fs.writeFileSync(moduleFilePath, entryText.join('\n'));
+  const moduleFilePath = path.join(__dirname, "../generated.ts");
+  fs.writeFileSync(moduleFilePath, entryText.join("\n"));
 } catch (error) {
   console.log(error);
 }

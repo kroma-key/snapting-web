@@ -1,8 +1,9 @@
-import React, { Suspense } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 
 import App from "./App";
 import { ThemeProvider } from "./components/provider/theme-provider";
+import { DrawerProvider } from "./components/ui/drawer";
 import { OverlayProvider } from "./hooks/use-overlay";
 
 import "@stackflow/plugin-basic-ui/index.css";
@@ -13,9 +14,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ThemeProvider>
       <OverlayProvider>
-        <Suspense>
+        <DrawerProvider>
           <App />
-        </Suspense>
+        </DrawerProvider>
       </OverlayProvider>
     </ThemeProvider>
   </React.StrictMode>,

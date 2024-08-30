@@ -5,13 +5,33 @@ import { Drawer as DrawerPrimitive } from "vaul";
 
 import { cn } from "@/library/utils";
 
+import { Flex } from "./theme/flex";
+
+const DrawerProvider = React.forwardRef<
+  React.ElementRef<typeof Flex>,
+  React.ComponentPropsWithoutRef<typeof Flex>
+>(({ direction = "column", className, children, ...props }, ref) => (
+  // eslint-disable-next-line react/no-unknown-property
+  <div vaul-drawer-wrapper="">
+    <Flex
+      ref={ref}
+      direction={direction}
+      className={cn("relative min-h-screen bg-background", className)}
+      {...props}
+    >
+      {children}
+    </Flex>
+  </div>
+));
+DrawerProvider.displayName = "Drawer";
+
 const Drawer = ({
   shouldScaleBackground = true,
   ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Root>) => (
   <DrawerPrimitive.Root shouldScaleBackground={shouldScaleBackground} {...props} />
 );
-Drawer.displayName = "Drawer";
+Drawer.displayName = "DrawerRoot";
 
 const DrawerTrigger = DrawerPrimitive.Trigger;
 
@@ -33,8 +53,10 @@ DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;
 
 const DrawerContent = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
->(({ className, children, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content> & {
+    hideHandle?: boolean;
+  }
+>(({ hideHandle, className, children, ...props }, ref) => (
   <DrawerPortal>
     <DrawerOverlay />
     <DrawerPrimitive.Content
@@ -45,7 +67,12 @@ const DrawerContent = React.forwardRef<
       )}
       {...props}
     >
-      <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted" />
+      <DrawerPrimitive.Handle
+        className={cn(
+          "mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted",
+          hideHandle && "invisible",
+        )}
+      />
       {children}
     </DrawerPrimitive.Content>
   </DrawerPortal>
@@ -53,7 +80,7 @@ const DrawerContent = React.forwardRef<
 DrawerContent.displayName = "DrawerContent";
 
 const DrawerHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn("grid gap-1.5 p-4 text-center sm:text-left", className)} {...props} />
+  <div className={cn("grid gap-1.5 text-center sm:text-left", className)} {...props} />
 );
 DrawerHeader.displayName = "DrawerHeader";
 
@@ -87,6 +114,7 @@ const DrawerDescription = React.forwardRef<
 DrawerDescription.displayName = DrawerPrimitive.Description.displayName;
 
 export {
+  DrawerProvider,
   Drawer,
   DrawerPortal,
   DrawerOverlay,

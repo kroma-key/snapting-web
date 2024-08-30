@@ -32,7 +32,4 @@
   },
   "include": ["src/**/*", "reset.d.ts"],
   "exlude": ["node_modules", "dist", "build", "coverage", "public"],
-  "references": [{
-    "path": "./tsconfig.node.json"
-  }]
 }

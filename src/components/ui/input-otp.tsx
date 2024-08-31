@@ -2,6 +2,7 @@
 
 import { OTPInput, OTPInputContext } from "input-otp";
 import * as React from "react";
+import { match } from "ts-pattern";
 
 import { Text } from "@/components/ui/theme/text";
 import { cn } from "@/library/utils";
@@ -62,11 +63,16 @@ InputOTPSlot.displayName = "InputOTPSlot";
 
 const InputOTPSeparator = React.forwardRef<
   React.ElementRef<"div">,
-  React.ComponentPropsWithoutRef<"div">
->(({ ...props }, ref) => (
+  React.ComponentPropsWithoutRef<"div"> & {
+    type?: "slash" | "dash";
+  }
+>(({ type = "slash", ...props }, ref) => (
   <div ref={ref} role="separator" {...props}>
     <Text size="heading/small" className="text-gray-200">
-      <Literal.Slash />
+      {match(type)
+        .with("slash", () => <Literal.Slash />)
+        .with("dash", () => <Literal.Dash />)
+        .exhaustive()}
     </Text>
   </div>
 ));

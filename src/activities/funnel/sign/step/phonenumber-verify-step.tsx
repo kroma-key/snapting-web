@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { A } from "@mobily/ts-belt";
 import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -12,11 +13,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { Flex } from "@/components/ui/theme/flex";
 import { Text } from "@/components/ui/theme/text";
 import { useTimer } from "@/hooks/useTimer";
-import { formatVerifySeconds } from "@/library/string";
 
 const verifyCodeLength = 4;
 const timerDuration = 180;
@@ -81,12 +81,17 @@ export const PhoneNumberVerifyStep: FC<{
                 <FormField
                   control={form.control}
                   name="verifyCode"
-                  // @TODO: show input as phone number format
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>인증번호 {formatVerifySeconds(time)} </FormLabel>
+                      <FormLabel>휴대폰 번호</FormLabel>
                       <FormControl>
-                        <Input type="tel" placeholder="대소문자를 구분해주세요" {...field} />
+                        <InputOTP maxLength={4} {...field}>
+                          <InputOTPGroup>
+                            {A.range(0, 3).map((index) => (
+                              <InputOTPSlot key={index} index={index} />
+                            ))}
+                          </InputOTPGroup>
+                        </InputOTP>
                       </FormControl>
                       <FormMessage />
                     </FormItem>

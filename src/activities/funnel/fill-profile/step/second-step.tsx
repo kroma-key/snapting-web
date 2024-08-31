@@ -147,7 +147,6 @@ export const SecondStep: FC<{
                           </InputOTPGroup>
                         </InputOTP>
                       </FormControl>
-
                       <FormMessage />
                     </FormItem>
                   )}

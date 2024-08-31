@@ -1,10 +1,12 @@
 "use client";
 
 import { OTPInput, OTPInputContext } from "input-otp";
-import { Dot } from "lucide-react";
 import * as React from "react";
 
+import { Text } from "@/components/ui/theme/text";
 import { cn } from "@/library/utils";
+
+import { Literal } from "./literal";
 
 const InputOTP = React.forwardRef<
   React.ElementRef<typeof OTPInput>,
@@ -32,8 +34,8 @@ InputOTPGroup.displayName = "InputOTPGroup";
 
 const InputOTPSlot = React.forwardRef<
   React.ElementRef<"div">,
-  React.ComponentPropsWithoutRef<"div"> & Readonly<{ index: number }>
->(({ index, className, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<"div"> & Readonly<{ index: number; placeholder?: React.ReactNode }>
+>(({ index, className, placeholder, ...props }, ref) => {
   const inputOTPContext = React.useContext(OTPInputContext);
   const { char, hasFakeCaret, isActive } = inputOTPContext.slots[index];
 
@@ -41,16 +43,16 @@ const InputOTPSlot = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "relative flex h-10 w-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md",
+        "relative flex size-16 items-center justify-center border-y border-r border-input text-xl transition-all first:rounded-l-md first:border-l last:rounded-r-md",
         isActive && "z-10 ring-2 ring-ring ring-offset-background",
         className,
       )}
       {...props}
     >
-      {char}
+      {char ?? placeholder}
       {hasFakeCaret && (
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-          <div className="animate-caret-blink h-4 w-px bg-foreground duration-1000" />
+          <div className="h-4 w-px animate-caret-blink bg-foreground duration-1000" />
         </div>
       )}
     </div>
@@ -63,7 +65,9 @@ const InputOTPSeparator = React.forwardRef<
   React.ComponentPropsWithoutRef<"div">
 >(({ ...props }, ref) => (
   <div ref={ref} role="separator" {...props}>
-    <Dot />
+    <Text size="heading/small" className="text-gray-200">
+      <Literal.Slash />
+    </Text>
   </div>
 ));
 InputOTPSeparator.displayName = "InputOTPSeparator";

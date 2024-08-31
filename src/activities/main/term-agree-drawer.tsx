@@ -16,8 +16,9 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { IconAlertTriangle } from "@/components/ui/icon";
-import { Text } from "@/components/ui/text";
 import { Flex } from "@/components/ui/theme/flex";
+import { Text } from "@/components/ui/theme/text";
+import { useUnsafeFlow } from "@/hooks/useFlow";
 
 type Announcement = {
   title: string;
@@ -48,7 +49,9 @@ const announcements = [
 
 export const TermAgreeDrawer: FC<{
   doesAgree: boolean;
-}> = ({ doesAgree }) => {
+  doesUserProfileExist?: boolean;
+}> = ({ doesAgree, doesUserProfileExist }) => {
+  const { push } = useUnsafeFlow();
   const [open, setOpen] = useState(!doesAgree);
 
   useEffect(() => {
@@ -57,7 +60,12 @@ export const TermAgreeDrawer: FC<{
 
   const handleAgree = useCallback(() => {
     // @TODO: do mutation here
-  }, []);
+
+    // after mutation, if user profile does not exist, redirect to fill profile funnel
+    if (!doesUserProfileExist) {
+      push("FillProfileFunnel", {});
+    }
+  }, [doesUserProfileExist, push]);
 
   return (
     <Drawer open={open} onOpenChange={setOpen} handleOnly>

@@ -8,7 +8,12 @@ const Slash: FC = () => {
   return <>/</>;
 };
 
+const Dash: FC = () => {
+  return <>-</>;
+};
+
 export const Literal = {
   Space,
   Slash,
+  Dash,
 };

@@ -39,10 +39,17 @@ const flexVariant = cva(["box-border"], {
     gap: {
       // rem: tailwind spacing scale
       // rem base: 16px
-      "0.25": "gap-1",
-      "0.5": "gap-2",
-      "0.75": "gap-3",
-      "2": "gap-8",
+      "4": "gap-1",
+      "6": "gap-1.5",
+      "8": "gap-2",
+      "12": "gap-3",
+      "16": "gap-4",
+      "20": "gap-5",
+      "24": "gap-6",
+      "32": "gap-8",
+      "36": "gap-9",
+      "56": "gap-14",
+      "64": "gap-16",
     },
     // @TODO: make it common with Box, Flex, Grid, Container, Section
     position: {

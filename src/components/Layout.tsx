@@ -7,3 +7,10 @@ export const Layout: React.FC<Props> = ({ appBar, children, ...props }) => (
     {children}
   </AppScreen>
 );
+
+export const LayoutWithMenu: React.FC<Props> = ({ appBar, children, ...props }) => (
+  <AppScreen appBar={appBar} {...props}>
+    {children}
+    {/* @TODO: add menubar */}
+  </AppScreen>
+);

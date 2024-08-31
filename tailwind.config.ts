@@ -19,6 +19,10 @@ const config = {
     },
     extend: {
       colors: {
+        grey: {
+          300: 'hsl(var(--grey-300))',
+          700: 'hsl(var(--grey-700))',
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

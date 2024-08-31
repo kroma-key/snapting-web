@@ -8,12 +8,13 @@ import type { ToastActionElement, ToastProps } from "@/components/ui/toast";
 const TOAST_LIMIT = 1;
 const TOAST_REMOVE_DELAY = 1000000;
 
-type ToasterToast = ToastProps & {
-  id: string;
-  title?: React.ReactNode;
-  description?: React.ReactNode;
-  action?: ToastActionElement;
-};
+type ToasterToast = ToastProps &
+  Readonly<{
+    id: string;
+    title?: React.ReactNode;
+    description?: React.ReactNode;
+    action?: ToastActionElement;
+  }>;
 
 const actionTypes = {
   ADD_TOAST: "ADD_TOAST",
@@ -32,25 +33,25 @@ function genId() {
 type ActionType = typeof actionTypes;
 
 type Action =
-  | {
+  | Readonly<{
       type: ActionType["ADD_TOAST"];
       toast: ToasterToast;
-    }
-  | {
+    }>
+  | Readonly<{
       type: ActionType["UPDATE_TOAST"];
       toast: Partial<ToasterToast>;
-    }
-  | {
+    }>
+  | Readonly<{
       type: ActionType["DISMISS_TOAST"];
       toastId?: ToasterToast["id"];
-    }
-  | {
+    }>
+  | Readonly<{
       type: ActionType["REMOVE_TOAST"];
       toastId?: ToasterToast["id"];
-    };
+    }>;
 
 interface State {
-  toasts: ToasterToast[];
+  readonly toasts: readonly ToasterToast[];
 }
 
 const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>();
@@ -124,6 +125,7 @@ export const reducer = (state: State, action: Action): State => {
   }
 };
 
+// eslint-disable-next-line functional/prefer-readonly-type
 const listeners: Array<(state: State) => void> = [];
 
 let memoryState: State = { toasts: [] };

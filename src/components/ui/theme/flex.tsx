@@ -60,12 +60,12 @@ const flexVariant = cva(["box-border"], {
       sticky: "sticky",
     },
     shrink: {
-      0: "flex-grow-0",
-      1: "flex-grow-1",
-    },
-    grow: {
       0: "flex-shrink-0",
       1: "flex-shrink-1",
+    },
+    grow: {
+      0: "flex-grow-0",
+      1: "flex-grow-1",
     },
   },
   defaultVariants: {

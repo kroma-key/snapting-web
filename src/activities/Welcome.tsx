@@ -13,11 +13,11 @@ const Welcome: ActivityComponentType = () => {
   const { push } = useUnsafeFlow();
 
   const handleSignIn = () => {
-    push("SignIn", {});
+    push("SignInFunnel", {});
   };
 
   const handleSignUp = () => {
-    push("SignUp", {});
+    push("SignUpFunnel", {});
   };
 
   return (
@@ -48,7 +48,7 @@ const Welcome: ActivityComponentType = () => {
           </Flex>
           <Flex direction="column" align="center">
             {/* @TODO: define text size and make color token */}
-            <Text size="14" color="gray/500">
+            <Text size="label/base/03" color="gray/500">
               로그인은
               <Literal.Space />
               <Link href="https://github.com" underline="always" weight="light">
@@ -62,7 +62,7 @@ const Welcome: ActivityComponentType = () => {
               </Link>
               에
             </Text>
-            <Text size="14" color="gray/400">
+            <Text size="label/base/03" color="gray/400">
               동의 하는 것을 의마합니다
             </Text>
           </Flex>

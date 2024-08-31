@@ -8,7 +8,6 @@ const textVariant = cva(["m-0"], {
   variants: {
     font: {
       pretendard: "font-pretendard",
-      // @TODO: add font sf-pro
     },
     weight: {
       light: "font-light",
@@ -16,18 +15,18 @@ const textVariant = cva(["m-0"], {
       medium: "font-medium",
       semibold: "font-semibold",
       bold: "font-bold",
+      extraBold: "font-extrabold",
     },
     size: {
-      "32": "text-[2rem] leading-[38px]",
-      "22": "text-[1.375rem] leading-[28px]",
-      // title/title01
-      "24": "text-[1.5rem] leading-[30px]",
-      // body/body01
-      "20": "text-[1.25rem] leading-[24px]",
-      // body/body02
-      "16": "text-[1rem] leading-[20px]",
-      // body/body03
-      "14": "text-[0.875rem] leading-[20px]",
+      "heading/medium": "text-[38px] leading-[40px]",
+      "heading/small": "text-[24px] leading-[32px]",
+      "heading/tiny": "text-[20px] leading-[28px]",
+      "label/large": "text-[18px] leading-[28px]",
+      "label/base/01": "text-[18px] leading-[26px]",
+      "label/base/02": "text-[16px] leading-[24px]",
+      "label/base/03": "text-[14px] leading-[20px]",
+      // @TODO: it is same with label/base/03
+      "paragraph/small": "text-[14px] leading-[20px]",
     },
     align: {
       left: "text-left",
@@ -41,33 +40,27 @@ const textVariant = cva(["m-0"], {
       balance: "whitespace-normal text-balance",
     },
     color: {
-      // @TODO: dynamic color?
       inherit: "text-inherit",
       primary: "text-primary",
-      "primary/300": "text-primary-300",
       "primary-foreground": "text-primary-foreground",
       destructive: "text-destructive",
       "destructive-foreground": "text-destructive-foreground",
-      "gray/400": "text-gray-400",
-      "gray/500": "text-gray-500",
-      // @TODO: check gray/600 color code
-      "gray/600": "text-gray-600",
-      "gray/800": "text-gray-800",
-      "gray/900": "text-gray-900",
+      muted: "text-muted",
+      "muted-foreground": "text-muted-foreground",
       white: "text-white",
       black: "text-black",
-      "slate/500": "text-slate-500",
-      "slate/700": "text-slate-700",
-      "slate/900": "text-slate-900",
+      "gray/400": "text-gray-400",
+      "gray/500": "text-gray-500",
       // unnamed color
-      "#ff6a00": "text-[#ff6a00]",
-      "#0f172a": "text-[#0f172a]",
+      "content-primary": "text-[#09090B]",
+      "content-secondary": "text-[#62626A]",
+      "content-teritary": "text-[#A1A1AA]",
     },
   },
   defaultVariants: {
     font: "pretendard",
-    weight: "normal",
-    size: "16",
+    weight: "medium",
+    size: "label/base/03",
     color: "inherit",
   },
 });

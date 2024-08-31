@@ -6,14 +6,15 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { IconClock, IconFilter, IconPlus, IconZap } from "@/components/ui/icon";
-import { Text } from "@/components/ui/text";
 import { Flex } from "@/components/ui/theme/flex";
+import { Text } from "@/components/ui/theme/text";
 import { useTimer } from "@/hooks/useTimer";
 
 import { TermAgreeDrawer } from "./term-agree-drawer";
 
 const Main: ActivityComponentType = () => {
   const doesAgreeTerm = false;
+  const doesUserProfileExist = false;
   const { time, formatTime, startTimer } = useTimer(2 * 60 * 60);
   const remainTime = useMemo(() => formatTime(time), [formatTime, time]);
 
@@ -103,7 +104,7 @@ const Main: ActivityComponentType = () => {
           </Flex>
         </Card>
         <Flex direction="column" gap="8">
-          <TermAgreeDrawer doesAgree={doesAgreeTerm} />
+          <TermAgreeDrawer doesAgree={doesAgreeTerm} doesUserProfileExist={doesUserProfileExist} />
           <Button fullWidth disabled radius="2xl" className="h-auto">
             <Text weight="semibold" size="label/large">
               아직 참여 시간이 아니에요

@@ -7,17 +7,18 @@ import { stackflow } from "@stackflow/react";
 import { decompressFromEncodedURIComponent } from "lz-string";
 import { z } from "zod";
 
+import { FillProfileFunnel } from "./activities/funnel/fill-profile";
+import { SignInFunnel } from "./activities/funnel/sign/sign-in";
+import { SignUpFunnel } from "./activities/funnel/sign/sign-up";
 import Main from "./activities/main";
-import SignIn from "./activities/SignIn";
-import SignUp from "./activities/SignUp";
 import Welcome from "./activities/Welcome";
 
 export const { Stack, activities, useStepFlow, useFlow } = stackflow({
   transitionDuration: 350,
   activities: {
     Welcome,
-    SignUp: {
-      component: SignUp,
+    SignUpFunnel: {
+      component: SignUpFunnel,
       paramsSchema: {
         type: "object",
         properties: {
@@ -25,11 +26,47 @@ export const { Stack, activities, useStepFlow, useFlow } = stackflow({
             type: "string",
           },
         },
-        required: [],
+        required: ["phoneNumber"],
       },
     },
-    SignIn,
+    SignInFunnel: {
+      component: SignInFunnel,
+      paramsSchema: {
+        type: "object",
+        properties: {
+          phoneNumber: {
+            type: "string",
+          },
+        },
+        required: ["phoneNumber"],
+      },
+    },
     Main,
+    // funnel
+    FillProfileFunnel: {
+      component: FillProfileFunnel,
+      paramsSchema: {
+        type: "object",
+        properties: {
+          nickName: {
+            type: "string",
+          },
+          gender: {
+            type: "string",
+          },
+          birthDay: {
+            type: "string",
+          },
+          areaSi: {
+            type: "string",
+          },
+          areaGu: {
+            type: "string",
+          },
+        },
+        required: ["nickName", "gender", "birthDay"],
+      },
+    },
   },
   plugins: [
     devtoolsPlugin(),
@@ -40,9 +77,10 @@ export const { Stack, activities, useStepFlow, useFlow } = stackflow({
     historySyncPlugin({
       routes: {
         Welcome: "/",
-        SignIn: "/sign-in",
-        SignUp: "/sign-up",
         Main: "/main",
+        SignInFunnel: "/sign-in",
+        SignUpFunnel: "/sign-up",
+        FillProfileFunnel: "/fill-profile",
       },
       fallbackActivity: () => "Welcome",
     }),

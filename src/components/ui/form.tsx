@@ -20,9 +20,9 @@ const Form = FormProvider;
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
-> = {
+> = Readonly<{
   name: TName;
-};
+}>;
 
 const FormFieldContext = React.createContext<FormFieldContextValue>({} as FormFieldContextValue);
 
@@ -62,9 +62,9 @@ const useFormField = () => {
   };
 };
 
-type FormItemContextValue = {
+type FormItemContextValue = Readonly<{
   id: string;
-};
+}>;
 
 const FormItemContext = React.createContext<FormItemContextValue>({} as FormItemContextValue);
 
@@ -84,16 +84,16 @@ FormItem.displayName = "FormItem";
 const FormLabel = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
->(({ className, ...props }, ref) => {
-  const { error, formItemId } = useFormField();
+>(({ className, children, ...props }, ref) => {
+  const {
+    // error,
+    formItemId,
+  } = useFormField();
 
   return (
-    <Label
-      ref={ref}
-      className={cn(error && "text-destructive", className)}
-      htmlFor={formItemId}
-      {...props}
-    />
+    <Label ref={ref} className={cn(className)} htmlFor={formItemId} {...props}>
+      {children}
+    </Label>
   );
 });
 FormLabel.displayName = "FormLabel";

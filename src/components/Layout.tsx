@@ -1,15 +1,16 @@
 import { AppScreen } from "@stackflow/plugin-basic-ui";
+import { ComponentPropsWithoutRef } from "react";
 
-type PropOf<T> = T extends React.ComponentType<infer U> ? U : never;
-
-interface LayoutProps {
-  appBar?: PropOf<typeof AppScreen>["appBar"];
-  children: React.ReactNode;
-}
-const Layout: React.FC<LayoutProps> = ({ appBar, children }) => (
-  <AppScreen appBar={appBar}>{children}</AppScreen>
+type Props = ComponentPropsWithoutRef<typeof AppScreen>;
+export const Layout: React.FC<Props> = ({ appBar, children, ...props }) => (
+  <AppScreen appBar={appBar} {...props}>
+    {children}
+  </AppScreen>
 );
 
-Layout.displayName = "Layout";
-
-export default Layout;
+export const LayoutWithMenu: React.FC<Props> = ({ appBar, children, ...props }) => (
+  <AppScreen appBar={appBar} {...props}>
+    {children}
+    {/* @TODO: add menubar */}
+  </AppScreen>
+);

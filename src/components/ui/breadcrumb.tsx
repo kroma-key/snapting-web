@@ -6,9 +6,10 @@ import { cn } from "@/library/utils";
 
 const Breadcrumb = React.forwardRef<
   HTMLElement,
-  React.ComponentPropsWithoutRef<"nav"> & {
-    separator?: React.ReactNode;
-  }
+  React.ComponentPropsWithoutRef<"nav"> &
+    Readonly<{
+      separator?: React.ReactNode;
+    }>
 >(({ ...props }, ref) => <nav ref={ref} aria-label="breadcrumb" {...props} />);
 Breadcrumb.displayName = "Breadcrumb";
 
@@ -35,9 +36,10 @@ BreadcrumbItem.displayName = "BreadcrumbItem";
 
 const BreadcrumbLink = React.forwardRef<
   HTMLAnchorElement,
-  React.ComponentPropsWithoutRef<"a"> & {
-    asChild?: boolean;
-  }
+  React.ComponentPropsWithoutRef<"a"> &
+    Readonly<{
+      asChild?: boolean;
+    }>
 >(({ asChild, className, ...props }, ref) => {
   const Comp = asChild ? Slot : "a";
 

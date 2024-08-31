@@ -48,9 +48,10 @@ MenubarTrigger.displayName = MenubarPrimitive.Trigger.displayName;
 
 const MenubarSubTrigger = React.forwardRef<
   React.ElementRef<typeof MenubarPrimitive.SubTrigger>,
-  React.ComponentPropsWithoutRef<typeof MenubarPrimitive.SubTrigger> & {
-    inset?: boolean;
-  }
+  React.ComponentPropsWithoutRef<typeof MenubarPrimitive.SubTrigger> &
+    Readonly<{
+      inset?: boolean;
+    }>
 >(({ className, inset, children, ...props }, ref) => (
   <MenubarPrimitive.SubTrigger
     ref={ref}
@@ -104,9 +105,10 @@ MenubarContent.displayName = MenubarPrimitive.Content.displayName;
 
 const MenubarItem = React.forwardRef<
   React.ElementRef<typeof MenubarPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof MenubarPrimitive.Item> & {
-    inset?: boolean;
-  }
+  React.ComponentPropsWithoutRef<typeof MenubarPrimitive.Item> &
+    Readonly<{
+      inset?: boolean;
+    }>
 >(({ className, inset, ...props }, ref) => (
   <MenubarPrimitive.Item
     ref={ref}
@@ -167,9 +169,10 @@ MenubarRadioItem.displayName = MenubarPrimitive.RadioItem.displayName;
 
 const MenubarLabel = React.forwardRef<
   React.ElementRef<typeof MenubarPrimitive.Label>,
-  React.ComponentPropsWithoutRef<typeof MenubarPrimitive.Label> & {
-    inset?: boolean;
-  }
+  React.ComponentPropsWithoutRef<typeof MenubarPrimitive.Label> &
+    Readonly<{
+      inset?: boolean;
+    }>
 >(({ className, inset, ...props }, ref) => (
   <MenubarPrimitive.Label
     ref={ref}

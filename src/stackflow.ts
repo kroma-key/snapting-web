@@ -1,4 +1,3 @@
-import { vars } from "@seed-design/design-token";
 import { basicUIPlugin } from "@stackflow/plugin-basic-ui";
 import { devtoolsPlugin } from "@stackflow/plugin-devtools";
 import { historySyncPlugin } from "@stackflow/plugin-history-sync";
@@ -6,28 +5,66 @@ import { mapInitialActivityPlugin } from "@stackflow/plugin-map-initial-activity
 import { basicRendererPlugin } from "@stackflow/plugin-renderer-basic";
 import { stackflow } from "@stackflow/react";
 import { decompressFromEncodedURIComponent } from "lz-string";
-import z from "zod";
+import { z } from "zod";
 
-import Article from "./activities/Article";
-import Main from "./activities/Main";
+import { FillProfileFunnel } from "./activities/funnel/fill-profile";
+import { SignInFunnel } from "./activities/funnel/sign/sign-in";
+import { SignUpFunnel } from "./activities/funnel/sign/sign-up";
+import Main from "./activities/main";
+import Welcome from "./activities/Welcome";
 
-export const { Stack, activities } = stackflow({
+export const { Stack, activities, useStepFlow, useFlow } = stackflow({
   transitionDuration: 350,
   activities: {
-    Main,
-    Article: {
-      component: Article,
+    Welcome,
+    SignUpFunnel: {
+      component: SignUpFunnel,
       paramsSchema: {
         type: "object",
         properties: {
-          articleId: {
-            type: "string",
-          },
-          title: {
+          phoneNumber: {
             type: "string",
           },
         },
-        required: ["articleId", "title"],
+        required: ["phoneNumber"],
+      },
+    },
+    SignInFunnel: {
+      component: SignInFunnel,
+      paramsSchema: {
+        type: "object",
+        properties: {
+          phoneNumber: {
+            type: "string",
+          },
+        },
+        required: ["phoneNumber"],
+      },
+    },
+    Main,
+    // funnel
+    FillProfileFunnel: {
+      component: FillProfileFunnel,
+      paramsSchema: {
+        type: "object",
+        properties: {
+          nickName: {
+            type: "string",
+          },
+          gender: {
+            type: "string",
+          },
+          birthDay: {
+            type: "string",
+          },
+          areaSi: {
+            type: "string",
+          },
+          areaGu: {
+            type: "string",
+          },
+        },
+        required: ["nickName", "gender", "birthDay"],
       },
     },
   },
@@ -36,25 +73,16 @@ export const { Stack, activities } = stackflow({
     basicRendererPlugin(),
     basicUIPlugin({
       theme: "cupertino",
-      backgroundColor: vars.$semantic.color.paperDefault,
-      appBar: {
-        textColor: vars.$scale.color.gray900,
-        iconColor: vars.$scale.color.gray900,
-        borderColor: vars.$semantic.color.divider3,
-        backButton: {
-          ariaLabel: "뒤로 가기",
-        },
-        closeButton: {
-          ariaLabel: "닫기",
-        },
-      },
     }),
     historySyncPlugin({
       routes: {
-        Main: "/",
-        Article: "/articles/:articleId",
+        Welcome: "/",
+        Main: "/main",
+        SignInFunnel: "/sign-in",
+        SignUpFunnel: "/sign-up",
+        FillProfileFunnel: "/fill-profile",
       },
-      fallbackActivity: () => "Main",
+      fallbackActivity: () => "Welcome",
     }),
     mapInitialActivityPlugin({
       mapper(url) {

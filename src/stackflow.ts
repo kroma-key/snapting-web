@@ -7,7 +7,7 @@ import { stackflow } from "@stackflow/react";
 import { decompressFromEncodedURIComponent } from "lz-string";
 import { z } from "zod";
 
-import Main from "./activities/Main";
+import Main from "./activities/main";
 import SignIn from "./activities/SignIn";
 import SignUp from "./activities/SignUp";
 import Welcome from "./activities/Welcome";

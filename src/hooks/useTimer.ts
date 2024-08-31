@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export const useTimer = (initialTime: number) => {
   const [time, setTime] = useState<number>(initialTime);
@@ -21,24 +21,41 @@ export const useTimer = (initialTime: number) => {
     };
   }, [isActive, time]);
 
-  const startTimer = () => {
+  const startTimer = useCallback(() => {
     setIsActive(true);
-  };
+  }, []);
 
-  const resetTimer = (newTime: number) => {
+  const resetTimer = useCallback((newTime: number) => {
     if (timerId.current) {
       clearInterval(timerId.current);
     }
     setTime(newTime);
     setIsActive(false);
-  };
+  }, []);
 
-  const stopTimer = () => {
+  const stopTimer = useCallback(() => {
     if (timerId.current) {
       clearInterval(timerId.current);
     }
     setIsActive(false);
-  };
+  }, []);
+
+  const formatTime = useCallback(
+    (
+      sec: number,
+    ): {
+      hours: number;
+      minutes: number;
+      seconds: number;
+    } => {
+      const hours = Math.floor(sec / 3600);
+      const minutes = Math.floor((sec % 3600) / 60);
+      const seconds = sec % 60;
+
+      return { hours, minutes, seconds };
+    },
+    [],
+  );
 
   return {
     time,
@@ -46,5 +63,6 @@ export const useTimer = (initialTime: number) => {
     startTimer,
     resetTimer,
     stopTimer,
+    formatTime,
   };
 };

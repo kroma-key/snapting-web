@@ -2,7 +2,7 @@ import type { SVGProps } from "react";
 
 import { colorMap } from "../token/color";
 
-export const size = ["36", "32", "24"] as const;
+export const size = ["36", "32", "24", "20"] as const;
 export type size = (typeof size)[number];
 
 export interface IconBaseProps {

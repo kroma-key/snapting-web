@@ -18,7 +18,8 @@ const textVariant = cva(["m-0"], {
       extraBold: "font-extrabold",
     },
     size: {
-      "label/large": "text-[18px] leading[28px]",
+      "heading/medium": "text-[38px] leading-[40px]",
+      "label/large": "text-[18px] leading-[28px]",
       "label/base/01": "text-[18px] leading-[26px]",
       "label/base/02": "text-[16px] leading-[24px]",
       "label/base/03": "text-[14px] leading-[20px]",
@@ -45,6 +46,7 @@ const textVariant = cva(["m-0"], {
       white: "text-white",
       black: "text-black",
       // unnamed color
+      "content-primary": "text-[#09090B]",
       "content-secondary": "text-[#62626A]",
       "content-teritary": "text-[#A1A1AA]",
     },

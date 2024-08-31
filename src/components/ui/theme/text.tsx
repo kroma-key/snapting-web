@@ -19,6 +19,7 @@ const textVariant = cva(["m-0"], {
     },
     size: {
       "32": "text-[2rem] leading-[38px]",
+      "22": "text-[1.375rem] leading-[28px]",
       // title/title01
       "24": "text-[1.5rem] leading-[30px]",
       // body/body01
